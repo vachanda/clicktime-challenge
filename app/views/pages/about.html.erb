@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="about-content">
+    <h2 id="the-pirate-shop">The Pirate Shop</h2>
+    <p>This sample web application simulates the functionalities of adding products to the cart and promotion engine. The <a href="https://www.clicktime.com/ctc/devintern.html">link</a> with a detailed description of the problem statement.</p>
+    <p>The web application implements the following functions:</p>
+    <ul>
+       <li>CRUD operations on the cart.</li>
+       <li>Automatic promotion application.</li>
+       <li>Promotion priority in the evaluation.</li>
+    </ul>
+    <h3 id="implementation-details">Implementation Details</h3>
+    <ul>
+       <li>
+          <h5 id="platform-details-">Platform Details:</h5>
+          <ul>
+             <li>Ruby - 2.5</li>
+             <li>Rails - 5.0.7</li>
+             <li>Sqlite3</li>
+          </ul>
+       </li>
+       <li>
+          <h5 id="design-details-">Design Details:</h5>
+          <ul>
+             <li>Implements backend using Ruby-on-Rails with full MVC architecture backed by sqlite3 database.</li>
+             <li>Implements frontend using twitter bootstrap framework and overrides for custom desgin.</li>
+             <li>Service layer pattern is implemented to keep the controllers light.</li>
+             <li>
+                List of Models:
+                <ul>
+                   <li><strong>Order</strong> - Represents attributes and functions of an order with the CRUD operations.</li>
+                   <li><strong>LineItem</strong> - Represents the individual component of the order.</li>
+                   <li><strong>Product</strong> - Represents the attributes used for describing an individual product.</li>
+                   <li><strong>Promotion</strong> - Represents the attributes used to describe a promotion (code, expiry_date, usage_limit, etc).</li>
+                   <li><strong>Promotion Actions</strong> - Represents the different kinds of actions that can be performed for a promotion (flat-rate, flat-percent, etc) at order level and at item level.</li>
+                   <li><strong>Promotion Rules</strong> - Represents the set of rules that check for the eligibility of a promotion (item count, line item category,etc).</li>
+                   <li><strong>Adjustment</strong> - Captures the of discount at an item-level or order-level and the associated promotion details.</li>
+                </ul>
+             </li>
+             <li>
+                List of APIs:
+                <ul>
+                   <li><strong>POST /api/line_items</strong> - Add items to the cart.</li>
+                   <li>
+                      <strong>
+                         PUT /api/line_items/
+                         <id>
+                      </strong>
+                      - Updates the items in the cart.
+                   </li>
+                   <li>
+                      <strong>
+                         DELETE /api/line_items/
+                         <id>
+                      </strong>
+                      - Deletes the particular item.
+                   </li>
+                </ul>
+             </li>
+          </ul>
+       </li>
+    </ul>
+    <h3 id="assumptions">Assumptions</h3>
+    <ul>
+       <li>The web-app creates one order per session and updates the same order on subsequent add to carts. To create a new order, please use the incognito window to access the application and close when you want to destroy the session.</li>
+       <li>The Promotion by will be applicable if all the promotion rules are eligible.</li>
+       <li>Item-discount or Order-discount are tracked with the help of adjustments and each adjustment maintains the eligibility using <code>eligible</code> attribute.</li>
+    </ul>
+    <h3 id="running-the-code">Running the code</h3>
+    <ul>
+       <li>
+          <h5 id="running-on-docker">Running on Docker</h5>
+          <ul>
+             <li>Build the docker image for the web-app by going to the app's home directory and running <code>docker build -t clicktime</code></li>
+             <li>Run the docker container - <code>docker run -d --name clicktime -p 0.0.0.0:3000:3000 clicktime:latest</code></li>
+             <li>Now the web application should be available from the browser using the address - <code>http://localhost:3000/</code></li>
+          </ul>
+       </li>
+    </ul>
+    <blockquote>
+       <p>Note: Please use this <a href="https://docs.docker.com/install/">link</a> to install docker depending on the existing platform.</p>
+    </blockquote>
+    <ul>
+       <li>
+          <h5 id="running-directly-on-the-host">Running directly on the host</h5>
+          <ul>
+             <li>Make sure to install ruby 2.5 on host.</li>
+             <li>Install the bundler - <code>gem install bundler -v 1.14.0</code></li>
+             <li>Install the dependent gems - <code>bundle install</code></li>
+             <li>Run the DB migrations - <code>rake db:migrate</code></li>
+             <li>Setup the initial data - <code>rake db:setup</code></li>
+             <li>Compile the assets - <code>rake assets:precompile</code></li>
+             <li>Run the server - <code>bundle exec rails s</code></li>
+          </ul>
+       </li>
+    </ul>
+    <blockquote>
+       <p>Note:  The above steps to run the web-app were tested on a Linux based platform.</p>
+    </blockquote>
+    <h3 id="test-cases">Test Cases</h3>
+    <blockquote>
+       <p>Note:  The test suite structure is created in the spec folder. To see existing test cases run - <code>rspec spec/</code></p>
+    </blockquote>
+    <h3 id="author">Author</h3>
+    <p>Name: Vachan Daffedar Aswathanarayana <br>
+       Email: vaas4627@colorado.edu
+    </p>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container product-list">
+    <div class="row">
+    	<% Product.all.each do |product| %>
+	        <div class="col-md-4">
+				<div class="thumbnail">
+					<img src='<%= product.image_url("thumbnail") %>' alt="<%= product.description %>" class="img-fluid">
+					<div class="rgba-white-light"></div>
+					<div class="caption">
+					  <h4 class="pull-right"><%= "$ #{product.price}" %></h4>
+					  <h4><%= product.name %></h4>
+					  <p><%= product.description %></p>
+					</div>
+					<div class="space-ten"></div>
+						<div class="btn-ground text-center">
+						    <button type="button" class="btn btn-primary" id="addToCartBtn" value="<%= product.id %>" onclick="return handleAddToCart(this)"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+						</div>
+					<div class="space-ten"></div>
+				</div>
+	        </div>
+        <% end %>
+    </div>
+</div>

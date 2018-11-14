@@ -1,0 +1,30 @@
+$font-default: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-bold: 'HelveticaNeue-Medium', 'Helvetica Neue Medium';
+
+.product-list {
+	padding: 10px 0 10px 0;
+	font: 13px/22px "Lato", Arial, sans-serif;
+}
+
+img {
+	margin-top: 5px;
+}
+
+.btn-primary {
+	margin-bottom: 5px;
+}
+
+.caption {
+	h4 {
+		font-size: 16px;
+		font-family: $font-bold;
+	}
+
+	p {
+		font-family: $font-default;
+	}
+}
+
+.row {
+	margin-left: 0px;
+}

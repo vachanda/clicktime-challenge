@@ -1,0 +1,46 @@
+<% order = Order.find_by_number(cookies[:orderNumber]) %>
+<% order_present = order.present? %>
+
+<% order_quantity = 0 %>
+<% if order_present %>
+  <% order_quantity = order.total_items %>
+<% end %>
+
+<nav>
+  <div class="container">
+    <ul class="navbar-left">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+    </ul> <!--end navbar-left -->
+
+    <ul class="navbar-right">
+      <li><span class="cart-placeholder" id="cart" onclick="return cartDropDown(event)"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"> <%= order_quantity %> </span></span></li>
+    </ul> <!--end navbar-right -->
+  </div> <!--end container -->
+</nav>
+  <% if order_present %>
+    <div class="cart-container">
+      <div class="shopping-cart" style="display: none;">
+        <div class="shopping-cart-header">
+          <i class="fa fa-shopping-cart cart-icon"></i><span class="badge"> <%= order_quantity %></span>
+          <div class="shopping-cart-total">
+            <span class="lighter-text">Total:</span>
+            <span class="main-color-text">$ <%= order.total %></span>
+          </div>
+        </div> <!--end shopping-cart-header -->
+
+        <ul class="shopping-cart-items">
+          <% order.line_items.limit(3).each do |li| %>
+            <li class="clearfix">
+              <img src="<%= li.product.image_url('cart')%>" alt="<%= li.product.description %>" />
+              <span class="item-name"><%= li.product.name %></span>
+              <span class="item-price">$ <%= li.price %></span>
+              <span class="item-quantity">Quantity: <%= li.quantity %></span>
+            </li>
+          <% end %>
+        </ul>
+        <h6 class="cart-note">Click on checkout to view the entire cart.</h6>
+        <a href="/checkout/cart" class="button">Checkout</a>
+      </div> <!--end shopping-cart -->
+    </div> <!--end container -->
+<% end %>

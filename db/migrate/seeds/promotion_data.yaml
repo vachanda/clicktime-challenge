@@ -1,0 +1,37 @@
+---
+- code: DVD378969931
+  name: 10% discount on DVDs
+  description: Discount for adding all the DVDs
+  expiry_date: '2018-12-31 00:00:00'
+  default_apply: true
+  priority: 100
+  promotion_rules_attributes:
+  - type: Promotion::Rules::ProductCategory
+    preferences: '{"category": "DVD"}'
+  promotion_actions_attributes:
+  - type: Promotion::Actions::Item::FlatPercent
+    preferences: '{"rate": 10.0}'
+- code: BLR317913692
+  name: 15% discount on Blu-Rays
+  description: Discount for adding all the Blu-Rays
+  expiry_date: '2018-12-31 00:00:00'
+  default_apply: true
+  priority: 100
+  promotion_rules_attributes:
+  - type: Promotion::Rules::ProductCategory
+    preferences: '{"category": "BLR"}'
+  promotion_actions_attributes:
+  - type: Promotion::Actions::Item::FlatPercent
+    preferences: '{"rate": 15.0}'
+- code: BLK378969931
+  name: 5% discount on Bulk order
+  description: Discount for adding more than 100 items
+  expiry_date: '2018-12-31 00:00:00'
+  default_apply: true
+  priority: 90
+  promotion_rules_attributes:
+  - type: Promotion::Rules::BulkCart
+    preferences: '{"total_items": 100}'
+  promotion_actions_attributes:
+  - type: Promotion::Actions::Order::FlatPercent
+    preferences: '{"rate": 5.0}'

@@ -1,0 +1,76 @@
+<% if @order.present? %>
+  <h1 class="checkout-header">Shopping Cart - <%= @order.number %></h1>
+
+  <% cart_details = @order.cart_details %>
+  <div class="checkout-shopping-cart">
+    <div class="column-labels">
+      <label class="product-image">Image</label>
+      <label class="product-details">Product</label>
+      <label class="product-price">Price</label>
+      <label class="product-quantity">Quantity</label>
+      <label class="product-removal">Remove</label>
+      <label class="product-line-price">Total</label>
+    </div>
+
+    <% cart_details[:line_items].each do |li| %>
+      <div class="product">
+        <div class="product-image">
+          <img src="<%= li[:product][:image_url] %>">
+        </div>
+        <div class="product-details">
+          <div class="product-title"><%= li[:product][:name] %>s</div>
+          <p class="product-description"><%= li[:product][:description] %></p>
+          <% unless li[:discount_total].zero? %>
+            <p class="product-promotion"><%= li[:promotion_details].first[:name] %></p>
+          <% end %>
+        </div>
+        <div class="product-price"><%= li[:price] %></div>
+        <div class="product-item-id">
+          <input type="hidden" class="line-item-id" value=<%= li[:id] %>>
+        </div>
+        <div class="product-product-id">
+          <input type="hidden" class="product-id" value=<%= li[:product][:id] %>>
+        </div>
+        <div class="product-quantity">
+          <input type="number" onchange="return updateQuantity(this)" value=<%= li[:quantity] %> min="1">
+        </div>
+        <div class="product-removal">
+          <button class="remove-product" onclick="return removeItem(this)">
+            Remove
+          </button>
+        </div>
+        <% if li[:discount_total].zero? %>
+            <div class="product-line-price"><%= li[:total] %></div>
+        <% else %>
+          <del class="product-line-price"> <%= li[:price] * li[:quantity] %> </del>
+          <ins class="product-line-price"><%= li[:total] %></ins>
+        <% end %>
+      </div>
+    <% end %>
+    <% discount = cart_details[:discount].present? ? cart_details[:discount] : 0.0 %>
+    <div class="totals">
+      <div class="totals-item">
+        <label>Item Total:</label>
+        <div class="totals-value" id="cart-subtotal"><%= cart_details[:item_total] %></div>
+      </div>
+      <div class="totals-item">
+        <label>Item Total Discount:</label>
+        <div class="totals-value" id="cart-subtotal"><%= cart_details[:line_item_discount] %></div>
+      </div>
+      <div class="totals-item">
+        <label>Order Discount:</label>
+        <div class="totals-value" id="cart-shipping"><%= discount %></div>
+        <% unless discount.zero? %>
+          <p class="order-promotion"><%= cart_details[:promotion_details].first[:name] %></p>
+        <% end %>
+      </div>
+      <div class="totals-item totals-item-total">
+        <label>Grand Total:</label>
+        <div class="totals-value" id="cart-total"><%= cart_details[:total] %></div>
+      </div>
+    </div>
+    <button class="checkout" disabled>Checkout</button>
+  </div>
+<% else %>
+  <h3 style="text-align: center;" class="checkout-header">Shopping Cart is Empty! Please add some products.</h3>
+<% end %>

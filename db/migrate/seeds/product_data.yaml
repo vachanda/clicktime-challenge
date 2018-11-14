@@ -1,0 +1,25 @@
+---
+- name: Star Wars Episode IV DVD
+  description: Fourth Installment of the Star Wars series in DVD
+  price: 20
+  category: DVD
+- name: Star Wars Episode V DVD
+  description: Fifth Installment of the Star Wars series in DVD
+  price: 20
+  category: DVD
+- name: Star Wars Episode VI DVD
+  description: Sixth Installment of the Star Wars series in DVD
+  price: 20
+  category: DVD
+- name: Star Wars Episode IV Blu-Ray
+  description: Fourth Installment of the Star Wars series in Blu-Ray
+  price: 25
+  category: BLR
+- name: Star Wars Episode V Blu-Ray
+  description: Fifth Installment of the Star Wars series in Blu-Ray
+  price: 25
+  category: BLR
+- name: Star Wars Episode VI Blu-Ray
+  description: Sixth Installment of the Star Wars series in Blu-Ray
+  price: 25
+  category: BLR
